@@ -64,14 +64,8 @@ Cypress.Commands.add(
     cy.get("#financiamento").select(tipoEdital);
     cy.contains("strong", "Recursos Contínuos").then(($element) => {
       if ($element.is(":visible")) {
-        cy.get("#recurso_continuo")
-          .should("be.visible")
-          .click({ force: true })
-          .type("100000");
-        cy.get("#recurso_esporadico")
-          .should("be.visible")
-          .click({ force: true })
-          .type("1000");
+        cy.get("#recurso_continuo").should("be.visible").click({ force: true }).type("100000");
+        cy.get("#recurso_esporadico").should("be.visible").click({ force: true }).type("1000");
       }
     });
 
@@ -85,9 +79,7 @@ Cypress.Commands.add(
         cy.wrap(element).click().type(inicioInscricao);
       } else {
         // O elemento não está visível, pule as ações ou execute ações alternativas
-        cy.log(
-          "Elemento #sem_onus_abertura não está visível, pulando interação."
-        );
+        cy.log("Elemento #sem_onus_abertura não está visível, pulando interação.");
       }
     });
     cy.get("#sem_onus_encerramento").then((element) => {
@@ -96,9 +88,7 @@ Cypress.Commands.add(
         cy.wrap(element).click().type(fimInscricao);
       } else {
         // O elemento não está visível, pule as ações ou execute ações alternativas
-        cy.log(
-          "Elemento #sem_onus_encerramento não está visível, pulando interação."
-        );
+        cy.log("Elemento #sem_onus_encerramento não está visível, pulando interação.");
       }
     });
     cy.get("#com_onus_abertura").then((element) => {
@@ -107,9 +97,7 @@ Cypress.Commands.add(
         cy.wrap(element).click().type(inicioInscricao);
       } else {
         // O elemento não está visível, pule as ações ou execute ações alternativas
-        cy.log(
-          "Elemento #sem_onus_encerramento não está visível, pulando interação."
-        );
+        cy.log("Elemento #sem_onus_encerramento não está visível, pulando interação.");
       }
     });
     cy.get("#com_onus_encerramento").then((element) => {
@@ -118,9 +106,7 @@ Cypress.Commands.add(
         cy.wrap(element).click().type(fimInscricao);
       } else {
         // O elemento não está visível, pule as ações ou execute ações alternativas
-        cy.log(
-          "Elemento #sem_onus_encerramento não está visível, pulando interação."
-        );
+        cy.log("Elemento #sem_onus_encerramento não está visível, pulando interação.");
       }
     });
     cy.get("#recurso_inicio").type(inicioRecurso);
@@ -162,9 +148,7 @@ Cypress.Commands.add(
         cy.wrap(element).click().type(10000);
       } else {
         // O elemento não está visível, pule as ações ou execute ações alternativas
-        cy.log(
-          "Elemento #sem_onus_encerramento não está visível, pulando interação."
-        );
+        cy.log("Elemento #sem_onus_encerramento não está visível, pulando interação.");
       }
     });
     cy.get(":nth-child(4) > .pull-right > .btn").click();
@@ -185,6 +169,18 @@ Cypress.Commands.add("cadastrarModalidade", ({ titulo, tipo }) => {
   cy.get(
     "#criar_editar_atividade-modal > .modal-dialog > .modal-content > .modal-footer > .btn-action"
   ).click();
+});
+
+Cypress.Commands.add("cadastrarRelatorioExecucao", ({ titulo, tipo }) => {
+  cy.wait(1000);
+  cy.get('.treeview > [href="#"]').click();
+  cy.get(".treeview-menu > :nth-child(3) > a").click();
+  cy.get(".box-header > .pull-right > .btn").click();
+  cy.wait(1000);
+  cy.get("#titulo").click().type(titulo);
+  cy.get(".formbuilder-icon-checkbox-group").click();
+  cy.get(".formbuilder-icon-date").click();
+  cy.get("#btn_adicionar_editar").click();
 });
 
 Cypress.Commands.add("submeterProposta", () => {
